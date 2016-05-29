@@ -1,20 +1,23 @@
-<?php
-namespace EssentialsPE\BaseFiles;
+package EssentialsPE.BaseFiles;
 
-use EssentialsPE\Loader;
-use pocketmine\command\CommandSender;
-use pocketmine\level\Location;
-use pocketmine\Player;
-use pocketmine\utils\Config;
+import EssentialsPE.Loader;
+import cn.nukkit.command.CommandSender;
+import cn.nukkit.level.Location;
+import cn.nukkit.Player;
+import cn.nukkit.utils.Config;
 
-class BaseSession{
-    /** @var BaseAPI */
-    private $api;
-    /** @var Player */
-    private $player;
-    /** @var Config */
-    private $config;
-    /** @var array */
+import java.lang.reflect.Array;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
+public class BaseSession{
+
+    private BaseAPI api;
+
+    private Player player;
+
+    private Config config;
+
     public static $defaults = [
         "isAFK" => false,
         "kickAFK" => null,
@@ -38,8 +41,9 @@ class BaseSession{
         "isVanished" => false,
         "noPacket" => false
     ];
-    /** @var array */
-    public static $configDefaults = [
+
+    public static LinkedHashMap<String, Object> configDefaults = new LinkedHashMap<>();
+
         "isAFK" => false,
         "isGod" => false,
         "homes" => [],
@@ -53,16 +57,11 @@ class BaseSession{
         "isVanished" => false
     ];
 
-    /**
-     * @param BaseAPI $api
-     * @param Player $player
-     * @param Config $config
-     * @param array $values
-     */
-    public function __construct(BaseAPI $api, Player $player, Config $config, array $values){
-        $this->api = $api;
-        $this->player = $player;
-        $this->config = $config;
+
+    public BaseSession(BaseAPI api, Player player, Config config, Array values){
+        this.api = api;
+        this.player = player;
+        this.config = config;
         self::$defaults["lastMovement"] = !$player->hasPermission("essentials.afk.preventauto") ? time() : null;
         foreach($values as $k => $v){
             $this->{$k} = $v;
@@ -284,7 +283,7 @@ class BaseSession{
      */
 
     /** @var array */
-    private $homes = [];
+    private HashMap<String, BaseLocation> homes = new HashMap<>();
 
     private function loadHomes(){
         $homes = [];

@@ -2,6 +2,7 @@ package EssentialsPE;
 
 import EssentialsPE.BaseFiles.BaseAPI;
 import EssentialsPE.BaseFiles.BaseCommand;
+import EssentialsPE.BaseFiles.BaseSession;
 import EssentialsPE.Commands.AFK;
 import EssentialsPE.Commands.Antioch;
 import EssentialsPE.Commands.Back;
@@ -75,11 +76,34 @@ import EssentialsPE.Events.CreateAPIEvent;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.TextFormat;
 
+import java.util.HashMap;
+
 public class Loader extends PluginBase{
     /** @var BaseAPI */
-    private $api;
+    private BaseAPI api;
 
-    public function onEnable(){
+    public void onEnable(){
+        BaseSession.configDefaults.put("isAFK", false);
+        BaseSession.configDefaults.put("isGod", false);
+        BaseSession.configDefaults.put("homes", new HashMap<String, >());
+        BaseSession.configDefaults.put("isMuted", false);
+        BaseSession.configDefaults.put("isAFK", false);
+        BaseSession.configDefaults.put("isAFK", false);
+        BaseSession.configDefaults.put("isAFK", false);
+        BaseSession.configDefaults.put("isAFK", false);
+        BaseSession.configDefaults.put("isAFK", false);
+        "isAFK" => false,
+                "isGod" => false,
+                "homes" => [],
+        "isMuted" => false,
+                "mutedUntil" => null,
+                "nick" => null,
+                "ptCommands" => false,
+                "ptChatMacros" => false,
+                "isPvPEnabled" => true,
+                "isUnlimitedEnabled" => false,
+                "isVanished" => false
+
         // Before anything else...
         $this->checkConfig();
 

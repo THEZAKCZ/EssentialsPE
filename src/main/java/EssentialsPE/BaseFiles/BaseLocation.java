@@ -3,7 +3,7 @@ package EssentialsPE.BaseFiles;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
 
-class BaseLocation extends Location{
+public class BaseLocation extends Location{
 
     protected String name;
 
