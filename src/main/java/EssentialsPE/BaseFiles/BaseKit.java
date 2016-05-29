@@ -1,22 +1,17 @@
-<?php
-namespace EssentialsPE\BaseFiles;
+package EssentialsPE.BaseFiles;
 
-use pocketmine\inventory\Inventory;
-use pocketmine\item\Item;
-use pocketmine\Player;
+import cn.nukkit.inventory.Inventory;
+import cn.nukkit.item.Item;
+import cn.nukkit.Player;
 
-class BaseKit{
-    /** @var string */
-    protected $name;
-    /** @var Item[] */
-    protected $items;
+public class BaseKit{
 
-    /**
-     * @param string $name
-     * @param array|Item[] $items
-     */
-    public function __construct($name, array $items){
-        $this->name = $name;
+    protected String name;
+
+    protected Item[] items;
+
+    public BaseKit(String name, Object[] items){
+        this.name = name;
         foreach($items as $i){
             if(!$i instanceof Item){
                 $i = explode(" ", $i);
