@@ -1,32 +1,21 @@
-<?php
-namespace EssentialsPE\BaseFiles;
+package EssentialsPE.BaseFiles;
 
-use EssentialsPE\Loader;
-use pocketmine\scheduler\PluginTask;
+import EssentialsPE.Loader;
 
-abstract class BaseTask extends PluginTask{
-    /** @var BaseAPI */
-    private $api;
+abstract class BaseTask {
 
-    /**
-     * @param BaseAPI $api
-     */
-    public function __construct(BaseAPI $api){
-        parent::__construct($api->getEssentialsPEPlugin());
-        $this->api = $api;
-    }
+				private BaseAPI api;
 
-    /**
-     * @return Loader
-     */
-    public final function getPlugin(): Loader{
-        return $this->getAPI()->getEssentialsPEPlugin();
-    }
+			    public BaseTask (BaseAPI api) {
+			    	getAPI().getEssentialsPEPlugin();
+			        this.api = api;
+			    }
 
-    /**
-     * @return BaseAPI
-     */
-    public final function getAPI(): BaseAPI{
-        return $this->api;
-    }
-}
+			    public final Loader getPlugin() {
+			        return getAPI().getEssentialsPEPlugin();
+			    }
+
+			    public final BaseAPI getAPI() {
+			        return this.api;
+			    }
+			}
