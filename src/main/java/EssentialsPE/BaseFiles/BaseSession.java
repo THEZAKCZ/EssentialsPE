@@ -5,6 +5,8 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.level.Location;
 import cn.nukkit.Player;
 import cn.nukkit.utils.Config;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.lang.reflect.Array;
 import java.util.HashMap;
@@ -198,29 +200,9 @@ public class BaseSession{
      *  |____/ \__,_|\___|_|\_\
      */
 
-    /** @var null */
-    private $lastLocation = null;
-
-    /**
-     * @return bool|Location
-     */
-    public function getLastPosition(){
-        if(!$this->lastLocation instanceof Location){
-            return false;
-        }
-        return $this->lastLocation;
-    }
-
-    /**
-     * @param Location $pos
-     */
-    public function setLastPosition(Location $pos){
-        $this->lastLocation = $pos;
-    }
-
-    public function removeLastPosition(){
-        $this->lastLocation = null;
-    }
+    @Getter
+    @Setter
+    private Location lastLocation = null;
 
     /**   _____            _                     _   _
      *   / ____|          | |                   | | (_)
@@ -230,22 +212,9 @@ public class BaseSession{
      *   \_____|\___|\___/|______\___/ \___\__,_|\__|_|\___/|_| |_|
      */
 
-    /** @var null|string */
-    private $geoLocation = null;
-
-    /**
-     * @return null|string
-     */
-    public function getGeoLocation(){
-        return $this->geoLocation;
-    }
-
-    /**
-     * @param string $location
-     */
-    public function setGeoLocation($location){
-        $this->geoLocation = $location;
-    }
+    @Getter
+    @Setter
+    private String geoLocation = null;
 
     /**   _____           _
      *   / ____|         | |
@@ -255,24 +224,9 @@ public class BaseSession{
      *   \_____|\___/ \__,_|
      */
 
-    /** @var bool */
-    private $isGod = false;
-
-    /**
-     * @return bool
-     */
-    public function isGod(): bool{
-        return $this->isGod;
-    }
-
-    /**
-     * @param bool $mode
-     * @return bool
-     */
-    public function setGod(bool $mode): bool{
-        $this->isGod = $mode;
-        return true;
-    }
+    @Getter
+    @Setter
+    private boolean isGod = false;
 
     /**  _    _
      *  | |  | |
@@ -282,10 +236,9 @@ public class BaseSession{
      *  |_|  |_|\___/|_| |_| |_|\___|___/
      */
 
-    /** @var array */
     private HashMap<String, BaseLocation> homes = new HashMap<>();
 
-    private function loadHomes(){
+    private void loadHomes(){
         $homes = [];
         foreach($this->homes as $name => $values){
             if(is_array($values) && count($values) > 1){
@@ -300,7 +253,7 @@ public class BaseSession{
         $this->homes = $homes;
     }
 
-    private function encodeHomes(){
+    private HashMap<String, BaseLocation> encodeHomes(){
         $homes = [];
         foreach($this->homes as $name => $object){
             if($object instanceof BaseLocation){
@@ -310,47 +263,27 @@ public class BaseSession{
         return $homes;
     }
 
-    /**
-     * @param string $home
-     * @return bool
-     */
-    public function homeExists(string $home): bool{
-        return $this->getAPI()->validateName($home) && isset($this->homes[$home]) && $this->homes[$home] instanceof BaseLocation;
+    public boolean homeExists(String home){
+        return getAPI().validateName(home) && homes.get(home) != null;
     }
 
-    /**
-     * @param string $home
-     * @return bool|BaseLocation
-     */
-    public function getHome(string $home){
-        if(!$this->homeExists($home)){
-            return false;
-        }
-        return $this->homes[$home];
+    public BaseLocation getHome(String home){
+        return homes.get(home);
     }
 
-    /**
-     * @param string $home
-     * @param Location $pos
-     * @return bool
-     */
-    public function setHome(string $home, Location $pos): bool{
-        if(!$this->getAPI()->validateName($home, false)){
+    public boolean setHome(String home, Location pos){
+        if(!getAPI().validateName(home, false)){
             return false;
         }
-        $this->homes[$home] = $pos instanceof BaseLocation ? $pos : BaseLocation::fromPosition($home, $pos);
+        homes.put(home, pos instanceof BaseLocation ? (BaseLocation) pos : BaseLocation.fromPosition(home, pos));
         return true;
     }
 
-    /**
-     * @param string $home
-     * @return bool
-     */
-    public function removeHome(string $home): bool{
-        if(!$this->homeExists($home)){
+    public boolean removeHome(String home){
+        if(!homeExists(home)){
             return false;
         }
-        unset($this->homes[$home]);
+        homes.remove(home);
         return true;
     }
 
