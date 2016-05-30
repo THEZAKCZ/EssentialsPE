@@ -3,7 +3,7 @@ package EssentialsPE.BaseFiles;
 import EssentialsPE.Loader;
 import cn.nukkit.event.plugin.PluginEvent;
 
-public abstract class BaseCustomEvent extends PluginEvent{
+public abstract class BaseCustomEvent extends PluginEvent {
 
     private BaseAPI api;
 
