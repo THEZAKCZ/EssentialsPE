@@ -1,81 +1,67 @@
-<?php
-namespace EssentialsPE\BaseFiles;
+package EssentialsPE.BaseFiles;
 
-use EssentialsPE\Loader;
-use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
-use pocketmine\Player;
-use pocketmine\utils\TextFormat;
+import EssentialsPE.Loader;
+import cn.nukkit.command.Command;
+import cn.nukkit.command.CommandSender;
+import cn.nukkit.command.PluginIdentifiableCommand;
+import cn.nukkit.Player;
+import cn.nukkit.utils.TextFormat;
 
-abstract class BaseCommand extends Command implements PluginIdentifiableCommand{
-    /** @var BaseAPI  */
-    private $api;
-    /** @var bool|string */
-    private $consoleUsageMessage;
+public abstract class BaseCommand extends Command implements PluginIdentifiableCommand{
 
-    /**
-     * @param BaseAPI $api
-     * @param string $name
-     * @param string $description
-     * @param null|string $usageMessage
-     * @param bool|null|string $consoleUsageMessage
-     * @param array $aliases
-     */
-    public function __construct(BaseAPI $api, $name, $description = "", $usageMessage = null, $consoleUsageMessage = true, array $aliases = []){
-        parent::__construct($name, $description, $usageMessage, $aliases);
-        $this->api = $api;
-        $this->consoleUsageMessage = $consoleUsageMessage;
+    private BaseAPI api;
+
+    private String consoleUsageMessage;
+
+    public BaseCommand(BaseAPI api, String name){
+        this(api, name, "", null, null, new String[0]);
     }
 
-    /**
-     * @return Loader
-     */
-    public final function getPlugin(): Loader{
-        return $this->getAPI()->getEssentialsPEPlugin();
+    public BaseCommand(BaseAPI api, String name, String description){
+        this(api, name, description, null, null, new String[0]);
     }
 
-    /**
-     * @return BaseAPI
-     */
-    public final function getAPI(): BaseAPI{
-        return $this->api;
+    public BaseCommand(BaseAPI api, String name, String description, String usageMessage){
+        this(api, name, description, usageMessage, null, new String[0]);
     }
 
-    /**
-     * @return string
-     */
-    public function getUsage(): string{
-        return "/" . parent::getName() . " " . parent::getUsage();
+    public BaseCommand(BaseAPI api, String name, String description, String usageMessage, String consoleUsageMessage){
+        this(api, name, description, usageMessage, consoleUsageMessage, new String[0]);
     }
 
-    /**
-     * @return bool|null|string
-     */
-    public function getConsoleUsage(){
-        return $this->consoleUsageMessage;
+    public BaseCommand(BaseAPI api, String name, String description, String usageMessage, String consoleUsageMessage, String[] aliases){
+        super(name, description, usageMessage, aliases);
+        this.api = api;
+        this.consoleUsageMessage = consoleUsageMessage;
     }
 
-    /**
-     * Function to give different type of usages, switching from "Console" and "Player" executors of a command.
-     * This function can be overridden to fit any command needs...
-     *
-     * @param CommandSender $sender
-     * @param string $alias
-     */
-    public function sendUsage(CommandSender $sender, string $alias){
-        $message = TextFormat::RED . "Usage: " . TextFormat::GRAY . "/$alias ";
-        if(!$sender instanceof Player){
-            if(is_string($this->consoleUsageMessage)){
-                $message .= $this->consoleUsageMessage;
-            }elseif(!$this->consoleUsageMessage){
-                $message = TextFormat::RED . "[Error] Please run this command in-game";
+    public final Loader getPlugin(){
+        return this.getAPI().getEssentialsPEPlugin();
+    }
+
+    public final BaseAPI getAPI(){
+        return this.api;
+    }
+
+    public String getUsage(){
+        return "/" + super.getName() +" " + super.getUsage();
+    }
+
+    public String getConsoleUsage(){
+        return this.consoleUsageMessage;
+    }
+
+    public void sendUsage(CommandSender sender, String alias){
+        String message = TextFormat.RED + "Usage: " + TextFormat.GRAY + "/"+alias+" ";
+        if(!(sender instanceof Player)){
+            if(consoleUsageMessage != null){
+                message += consoleUsageMessage;
             }else{
-                $message .= str_replace("[player]", "<player>", parent::getUsage());
+                message += super.getUsage().replaceAll("[player]", "<player>");
             }
         }else{
-            $message .= parent::getUsage();
+            message += super.getUsage();
         }
-        $sender->sendMessage($message);
+        sender.sendMessage(message);
     }
 }
