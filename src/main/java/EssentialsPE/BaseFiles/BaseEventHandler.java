@@ -1,31 +1,21 @@
-<?php
-namespace EssentialsPE\BaseFiles;
+package EssentialsPE.BaseFiles;
 
-use EssentialsPE\Loader;
-use pocketmine\event\Listener;
+import EssentialsPE.Loader;
+import cn.nukkit.event.Listener;
 
 abstract class BaseEventHandler implements Listener{
-    /** @var BaseAPI */
-    private $api;
+	
+	private BaseAPI api;
 
-    /**
-     * @param BaseAPI $api
-     */
-    public function __construct(BaseAPI $api){
-        $this->api = $api;
+    public BaseEventHandler (BaseAPI api){
+        this.api = api;
     }
 
-    /**
-     * @return Loader
-     */
-    public final function getPlugin(): Loader{
-        return $this->getAPI()->getEssentialsPEPlugin();
+    public final Loader getPlugin(){
+        return getAPI().getEssentialsPEPlugin();
     }
 
-    /**
-     * @return BaseAPI
-     */
-    public final function getAPI(): BaseAPI{
-        return $this->api;
+    public BaseAPI getAPI() {
+        return this.api;
     }
 }
