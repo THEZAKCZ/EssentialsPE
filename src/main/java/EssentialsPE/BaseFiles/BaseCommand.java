@@ -7,7 +7,7 @@ import cn.nukkit.command.PluginIdentifiableCommand;
 import cn.nukkit.Player;
 import cn.nukkit.utils.TextFormat;
 
-public abstract class BaseCommand extends Command implements PluginIdentifiableCommand{
+public abstract class BaseCommand extends Command implements PluginIdentifiableCommand {
 
     private BaseAPI api;
 
