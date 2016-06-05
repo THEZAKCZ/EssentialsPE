@@ -9,7 +9,7 @@ import cn.nukkit.utils.TextFormat;
 abstract class SetSpawn extends BaseCommand{
 
     public SetSpawn(BaseAPI api){
-        super(api, "setspawn", "Change your server main spawn point");
+        super(api, "setspawn", "Nastavi pozici spawnu");
         this.setPermission("essentials.setspawn");
     }
 
@@ -24,8 +24,8 @@ abstract class SetSpawn extends BaseCommand{
         Player player = (Player)sender;
         player.getLevel().setSpawnLocation(player.getLocation());
         player.getServer().setDefaultLevel(player.getLevel());
-        player.sendMessage(TextFormat.YELLOW + "Server's spawn point changed!");
-        this.getAPI().getServer().getLogger().info(TextFormat.YELLOW + "Server's spawn point set to " + TextFormat.AQUA + player.getLevel().getName() + TextFormat.YELLOW + " by " + TextFormat.GREEN + sender.getName());
+        player.sendMessage(TextFormat.YELLOW + "Pozice spawnu byla zmenena!");
+        this.getAPI().getServer().getLogger().info(TextFormat.YELLOW + "Pozice spawnu byla nastavena na " + TextFormat.AQUA + player.getLevel().getName() + TextFormat.YELLOW + " od " + TextFormat.GREEN + sender.getName());
         return true;
     }
 }
