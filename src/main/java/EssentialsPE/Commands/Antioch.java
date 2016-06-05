@@ -9,7 +9,7 @@ import cn.nukkit.utils.TextFormat;
 abstract class Antioch extends BaseCommand{
 
     public Antioch(BaseAPI api){
-        super(api, "antioch", "Holy hand grenade", null);
+        super(api, "antioch", "Hozeni granatu", null);
         this.setPermission("essentials.antioch");
     }
 
@@ -23,10 +23,10 @@ abstract class Antioch extends BaseCommand{
         }
         Player player = (Player)sender;
         if(!this.getAPI().antioch(player)){
-            sender.sendMessage(TextFormat.RED + "[Error] Cannot throw the grenade, there isn't a near valid block");
+            sender.sendMessage(TextFormat.RED + "[Chyba] Nemuzes hodit granat, protoze nikde blisko neni platny block.");
             return false;
         }
-        sender.sendMessage(TextFormat.GREEN + "Grenade threw!");
+        sender.sendMessage(TextFormat.GREEN + "Granat vyhozen!");
         return true;
     }
 }
