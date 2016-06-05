@@ -8,7 +8,7 @@ import cn.nukkit.utils.TextFormat;
 abstract class Broadcast extends BaseCommand{
 	
     public Broadcast(BaseAPI api){
-        super(api, "broadcast", "Broadcast a message.", "<message>");
+        super(api, "broadcast", "Posle zpravu pro vsechny hrace.", "<message>");
         this.setPermission("essentials.broadcast");
     }
 
@@ -20,7 +20,7 @@ abstract class Broadcast extends BaseCommand{
             this.sendUsage(sender, alias);
             return false;
         }
-        sender.getServer().broadcastMessage(TextFormat.LIGHT_PURPLE + "[Broadcast] " + TextFormat.RESET + " " + args);
+        sender.getServer().broadcastMessage(TextFormat.LIGHT_PURPLE + "[Zprava] " + TextFormat.RESET + " " + args);
         return true;
     }
 }
