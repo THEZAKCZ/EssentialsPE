@@ -8,7 +8,7 @@ import cn.nukkit.command.CommandSender;
 abstract class Suicide extends BaseCommand{
 	
     public Suicide(BaseAPI api){
-        super(api, "suicide", "Kill yourself");
+        super(api, "suicide", "Sebevrazda");
         this.setPermission("essentials.suicide");
     }
 
