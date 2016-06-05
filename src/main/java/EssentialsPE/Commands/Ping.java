@@ -4,7 +4,7 @@ import EssentialsPE.BaseFiles.BaseAPI;
 import EssentialsPE.BaseFiles.BaseCommand;
 import cn.nukkit.command.CommandSender;
 
-abstract class Ping extends BaseCommand{
+abstract class Ping extends BaseCommand {
 	
     public Ping(BaseAPI api){
         super(api, "ping", "Pong!");
