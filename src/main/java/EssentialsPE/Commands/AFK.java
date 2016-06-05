@@ -10,7 +10,7 @@ import cn.nukkit.utils.TextFormat;
 abstract class AFK extends BaseCommand{
 
     public AFK(BaseAPI $api){
-        super($api, "afk", "Toggle the \"Away From the Keyboard\" status", "[player]");
+        super($api, "afk", "Toggle the \"mimo dosah klavesnice\" status", "[player]");
         this.setPermission("essentials.afk.use");
     }
 
