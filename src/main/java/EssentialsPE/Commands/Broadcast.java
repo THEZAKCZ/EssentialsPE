@@ -5,7 +5,7 @@ import EssentialsPE.BaseFiles.BaseCommand;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.utils.TextFormat;
 
-abstract class Broadcast extends BaseCommand {
+abstract class Broadcast extends BaseCommand{
 	
     public Broadcast(BaseAPI api){
         super(api, "broadcast", "Posle zpravu pro vsechny hrace.", "<message>");
