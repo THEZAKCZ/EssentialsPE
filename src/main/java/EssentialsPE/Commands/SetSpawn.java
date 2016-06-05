@@ -6,7 +6,7 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.utils.TextFormat;
 
-abstract class SetSpawn extends BaseCommand{
+abstract class SetSpawn extends BaseCommand {
 
     public SetSpawn(BaseAPI api){
         super(api, "setspawn", "Nastavi pozici spawnu");
