@@ -31,7 +31,9 @@ abstract class AFK extends BaseCommand{
     		if((args.length == 1 && !(sender.getServer().getOfflinePlayer(args[0]).isOnline()))) {
                 sender.sendMessage(TextFormat.RED + "[Chyba] Hrac neni online");
                 return false;
-            }
+    		} else if(args.length == 1) {
+    			player = sender.getServer().getPlayer(args[0]);
+    		}
         }
         
         this.getAPI().switchAFKMode(player, true);
